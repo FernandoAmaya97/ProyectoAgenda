@@ -18,6 +18,24 @@ agendaCntrl.renderAgenda = async (req, res) => {
     res.render('contactos/all-contacts', { contactos});
 };
 
+agendaCntrl.renderAgendaU = async (req, res) => {
+    //console.log(req.query.buscar);
+    const coincidencia = await Contact.findOne({ 'nombre': {$regex:'.*'+req.query.buscar+'.*'} });
+    console.log(coincidencia)
+    res.render('contactos/find-contact', { coincidencia});
+};
+
+//agendaCntrl.renderAgendaU = async (req, res) => {
+    // Obtener el valor ingresado en el campo de búsqueda
+ //   const searchTerm = req.query.buscar;
+  
+    // Realizar la búsqueda en la agenda utilizando el término ingresado
+ //   const searchResults = await agenda.searchByName(searchTerm);
+  
+    // Mostrar los resultados de la búsqueda en la página
+ //   res.render("agenda", { searchResults });
+ // };
+  
 // UPDATE
 agendaCntrl.renderEditForm = async (req, res) => {
     const contactosEdit = await Contact.findById(req.params.id).lean();

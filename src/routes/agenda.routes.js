@@ -3,7 +3,8 @@ const router = Router();
 
 const { renderAgendaForm, 
     createNewContact, 
-    renderAgenda, 
+    renderAgenda,
+    renderAgendaU, 
     renderEditForm, 
     updateContact, 
     deleteContact} = require('../controllers/agenda.controller');
@@ -15,6 +16,8 @@ router.post('/agenda/new-contact', createNewContact);
 
 // Obtener Agenda Completa
 router.get('/agenda', renderAgenda);
+// Obtener coincidencias por nombre
+router.get('/agenda/buscar', renderAgendaU);
 
 //Edit Ccontact
 router.get('/agenda/edit/:id', renderEditForm);
