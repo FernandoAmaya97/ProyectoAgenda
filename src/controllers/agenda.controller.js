@@ -10,6 +10,7 @@ agendaCntrl.createNewContact = async (req, res) => {
     const {nombre, correo, telefono, status} = req.body;
     const newContact = new Contact({nombre , correo , telefono, status});
     await newContact.save();
+    req.flash('success_msg', 'Contact Added successfully');
     res.redirect('/agenda');
 };
 
@@ -33,12 +34,14 @@ agendaCntrl.renderEditForm = async (req, res) => {
   agendaCntrl.updateContact = async(req, res) => {
     const { nombre, correo, telefono } = req.body;
     await Contact.findByIdAndUpdate(req.params.id, { nombre, correo, telefono });
+    req.flash('success_msg','Contact Updated Successfully');
     res.redirect('/agenda');
 };
 
 // DELETE
 agendaCntrl.deleteContact = async (req, res) => {
     await Contact.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Contact Deleted Successfully');
     res.redirect('/agenda');
 }
 
