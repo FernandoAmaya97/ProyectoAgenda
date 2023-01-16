@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 //routes
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/agenda.routes'));
+app.use(require('./routes/users.routes'));
 
 
 
