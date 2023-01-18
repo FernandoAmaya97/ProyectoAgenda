@@ -15,7 +15,7 @@ agendaCntrl.createNewContact = async (req, res) => {
 };
 
 agendaCntrl.renderAgenda = async (req, res) => {
-    const contactos = await Contact.find().lean();
+    const contactos = await Contact.find({status: 1 }).lean();
     res.render('contactos/all-contacts', { contactos});
 };
 
@@ -40,7 +40,7 @@ agendaCntrl.renderEditForm = async (req, res) => {
 
 // DELETE
 agendaCntrl.deleteContact = async (req, res) => {
-    await Contact.findByIdAndDelete(req.params.id);
+    await Contact.findByIdAndUpdate(req.params.id, {status: 0});
     req.flash('success_msg','Contact Deleted Successfully');
     res.redirect('/agenda');
 }
